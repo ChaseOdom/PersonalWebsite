@@ -1,6 +1,7 @@
 'use client'
 import React, {useRef} from "react";
 import Image, { StaticImageData } from 'next/image';
+/*
 import {GameCard} from "@/components/gamecard2";
 import { Button, Card, CardBody, Tab, Tabs } from "@nextui-org/react";
 import pulseTitle from "../gamecontent/pulse/title.png";
@@ -16,8 +17,9 @@ interface mainCardStruct {
     description: string;
     gameImgs: StaticImageData[];
 }
-
+*/
 export default function App() {
+    /*
     const [selectedCard, setSelectedCard] = React.useState(0);
 
     function cardSelected(index: number){
@@ -70,5 +72,6 @@ export default function App() {
                 <Button color="default" size="lg" radius="lg" isIconOnly={true} onPress={rightCardButtonPressed}>{'>'}</Button>
             </div>
         </div>
-    );
+    );*/
+    return (<div>Hello</div>);
 }

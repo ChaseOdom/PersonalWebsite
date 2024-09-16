@@ -3,7 +3,7 @@ import React, {useRef} from "react";
 import {GameCard} from "@/components/gamecard2";
 import { Button, Card, CardBody, Tab, Tabs } from "@nextui-org/react";
 import stevon from "@/components/pictures/ARR.png";
-import pulseTitle from "@/gamecontent/pulse/title.png";
+import pulseTitle from "../gamecontent/pulse/title.png";
 
 export default function App() {
   const [selectedCard, setSelectedCard] = React.useState(-1);
