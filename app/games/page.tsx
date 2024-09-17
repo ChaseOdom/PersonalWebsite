@@ -9,8 +9,8 @@ import pulse1 from "@/components/gamecontent/pulse/monster.png";
 import pulse2 from "@/components/gamecontent/pulse/minimap.png";
 import pulse3 from "@/components/gamecontent/pulse/gameplay.png";
 import cowTitle from "@/components/gamecontent/cca/title.png";
-import cabinTitle from "@/components/gamecontent/Dreadwood/title.png";
-import spanTitle from "@/components/gamecontent/AttentionSpan/title.png";
+import cabinTitle from "@/components/gamecontent/dreadwood/title.png";
+import spanTitle from "@/components/gamecontent/attentionspan/title.png";
 import styles from '@/components/App.module.css';
 
 interface mainCardStruct {
