@@ -7,7 +7,7 @@ interface cardProps {
     title: string;
     description: string;
     selected: boolean;
-    cardImgSrc: string;
+    cardImg: StaticImageData;
     cardClicked: (message: number) => void;
     index: number;
 }
@@ -25,7 +25,7 @@ export function GameCard(props: cardProps) {
                 <small className="text-default-500">{props.description}</small>
             </CardHeader>
             <CardBody className="overflow-visible py-2 place-items-baseline">
-                <img className="object-cover" src={props.cardImgSrc} width={150} height={150}alt="Stevon"/>
+                <Image className="object-cover" src={props.cardImg} width={150} height={150}alt="Stevon"/>
             </CardBody>
         </Card>
 );
