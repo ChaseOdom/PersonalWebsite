@@ -1,25 +1,25 @@
 'use client'
 import React, {useRef} from "react";
 import Image, { StaticImageData } from 'next/image';
-/*
+
 import {GameCard} from "@/components/gamecard2";
 import { Button, Card, CardBody, Tab, Tabs } from "@nextui-org/react";
-import pulseTitle from "../gamecontent/pulse/title.png";
-import pulse1 from "../gamecontent/pulse/monster.png";
-import pulse2 from "../gamecontent/pulse/minimap.png";
-import pulse3 from "../gamecontent/pulse/gameplay.png";
-import cowTitle from "../gamecontent/cca/title.png";
-import cabinTitle from "../gamecontent/Dreadwood/title.png";
-import spanTitle from "../gamecontent/AttentionSpan/title.png";
+import pulseTitle from "@/components/gamecontent/pulse/title.png";
+import pulse1 from "@/components/gamecontent/pulse/monster.png";
+import pulse2 from "@/components/gamecontent/pulse/minimap.png";
+import pulse3 from "@/components/gamecontent/pulse/gameplay.png";
+import cowTitle from "@/components/gamecontent/cca/title.png";
+import cabinTitle from "@/components/gamecontent/Dreadwood/title.png";
+import spanTitle from "@/components/gamecontent/AttentionSpan/title.png";
 import styles from '@/components/App.module.css';
 
 interface mainCardStruct {
     description: string;
     gameImgs: StaticImageData[];
 }
-*/
+
 export default function App() {
-    /*
+    
     const [selectedCard, setSelectedCard] = React.useState(0);
 
     function cardSelected(index: number){
@@ -72,6 +72,6 @@ export default function App() {
                 <Button color="default" size="lg" radius="lg" isIconOnly={true} onPress={rightCardButtonPressed}>{'>'}</Button>
             </div>
         </div>
-    );*/
+    );
     return (<div>Hello</div>);
 }
