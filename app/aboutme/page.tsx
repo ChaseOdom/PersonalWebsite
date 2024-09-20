@@ -19,16 +19,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <div className="m-5 flex items-center">
-        <video className="flex w-1/3" controls>
-          <source src="/piano2.MP4"></source>
-        </video>
-        <div className="inline-block w-1/2 space-x-5">
-          <p className=" m-5"> I've played Piano since I was about 10. I used to play a lot of sheet music, but I was never good at sight reading.
-            In the last year or so I've been getting into freestyling. Here's a video of me doing a little e minor diddy.
-            I especially like blues freestyles. I have roots in New Orleans, so it's fun to have that connection mixed with something I like. </p>
-        </div>
-      </div>
+      
 
       <div className="m-5 flex items-center">
         <div className="inline-block w-1/2 m-5">
@@ -63,4 +54,17 @@ export default function AboutPage() {
         <img src="/Car.jpg" className="h-10 w-10"></img>
       </Card>
     </div>
+*/
+
+/*
+      <div className="m-5 flex items-center">
+        <video className="flex w-1/3" controls>
+          <source src="/piano2.MP4"></source>
+        </video>
+        <div className="inline-block w-1/2 space-x-5">
+          <p className=" m-5"> I've played Piano since I was about 10. I used to play a lot of sheet music, but I was never good at sight reading.
+            In the last year or so I've been getting into freestyling. Here's a video of me doing a little e minor diddy.
+            I especially like blues freestyles. I have roots in New Orleans, so it's fun to have that connection mixed with something I like. </p>
+        </div>
+      </div>
 */
