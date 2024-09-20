@@ -22,7 +22,7 @@ export default function AboutPage() {
       <div className="m-5 flex items-center">
         <video className="flex w-1/3" controls>
           <track default kind="captions" src="" />
-          <source src="/piano2.MP4"></source>
+          <source src="/piano2.mp4"></source>
         </video>
         <div className="inline-block w-1/2 space-x-5">
           <p className=" m-5"> I&apos;ve played Piano since I was about 10. I used to play a lot of sheet music, but I was never good at sight reading.
@@ -44,7 +44,7 @@ export default function AboutPage() {
 
       <div className="m-5 flex items-center">
         <div className="flex w-1/4">
-          <img src="/Car.jpg"></img>
+          <img src="/car.jpg"></img>
         </div>
         <div className="inline-block w-1/2 m-5">
           <p className=""> I&apos;ve had 2 mustangs in my life My dad got my first when I was in highschool and it got me through college. It was a maroon 2006 coupe.
