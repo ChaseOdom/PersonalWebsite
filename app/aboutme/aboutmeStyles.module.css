@@ -1,3 +1,4 @@
 .paragraphFont{
-    font-size: .8vw;
+    font-size: calc(.6vw + 12px);
+    margin-left: 2%;
 }

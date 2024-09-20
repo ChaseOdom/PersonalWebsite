@@ -13,7 +13,7 @@ export default function AboutPage() {
     
       <div className="m-5 flex items-center">
         <div className="inline-block w-1/2 m-5">
-          <p className="">I&apos;ve done every Escape Room at Escape Hour Austin. It&apos;s got about 6 or so rooms in the North Austin location.
+          <p className={styles.paragraphFont}>I&apos;ve done every Escape Room at Escape Hour Austin.
             The christmas escape room had little cups so that you could self-serve hot cocoa. I&apos;d highly recommend going! </p>
         </div>
         <div className="flex w-1/2">
@@ -27,15 +27,15 @@ export default function AboutPage() {
           <source src="/piano2.mp4"></source>
         </video>
         <div className="inline-block w-1/2 space-x-5">
-          <p className=" m-5"> I&apos;ve played Piano since I was about 10. I used to play a lot of sheet music, but I was never good at sight reading.
+          <p className={styles.paragraphFont}> I used to play a lot of piano with sheet music, but I was never good at sight reading.
             In the last year or so I&apos;ve been getting into freestyling. Here&apos;s a video of me doing a little e minor jig.
-            I especially like blues freestyles. I have roots in New Orleans, so it&apos;s fun to have that connection mixed with something I like. </p>
+            I especially like blues freestyles. </p>
         </div>
       </div>
 
       <div className="m-5 flex items-center">
         <div className="inline-block w-1/2 m-5">
-          <p className=""> I love hamsters! They&apos;re the best pet. In college I wanted a low maintenance pet, but found out I was allergic to cats! D:
+          <p className={styles.paragraphFont}> I love hamsters! They&apos;re the best pet. In college I wanted a low maintenance pet, but found out I was allergic to cats! D:
             Hamsters are great workarounds! haha they&apos;re cuter than cats, but you can&apos;t play with them as much. So that&apos;s the compromise you run getting one.
           </p>
         </div>
