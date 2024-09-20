@@ -15,7 +15,7 @@ export default function AboutPage() {
             The christmas escape room had little cups so that you could self-serve hot cocoa. I&apos;d highly recommend going! </p>
         </div>
         <div className="flex w-1/3">
-          <img src="/escape.jpg"></img>
+          <img src="/escape.JPG"></img>
         </div>
       </div>
 
@@ -44,7 +44,7 @@ export default function AboutPage() {
 
       <div className="m-5 flex items-center">
         <div className="flex w-1/4">
-          <img src="/car.jpg"></img>
+          <img src="/Car.jpg"></img>
         </div>
         <div className="inline-block w-1/2 m-5">
           <p className=""> I&apos;ve had 2 mustangs in my life My dad got my first when I was in highschool and it got me through college. It was a maroon 2006 coupe.
