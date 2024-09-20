@@ -24,7 +24,7 @@ export function GameCard(props: cardProps) {
                 <p className={styles.test}>{props.title}</p>
                 
             </CardHeader>
-            <CardBody className="flex items-center overflow-hidden ">
+            <CardBody className={styles.cardPicture}>
                 <Image src={props.cardImg} alt="Stevon"/>
             </CardBody>
         </Card>
