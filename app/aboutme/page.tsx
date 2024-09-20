@@ -19,7 +19,16 @@ export default function AboutPage() {
         </div>
       </div>
 
-      
+      <div className="m-5 flex items-center">
+        <video className="flex w-1/3" controls>
+          <source src="/piano2.MP4"></source>
+        </video>
+        <div className="inline-block w-1/2 space-x-5">
+          <p className=" m-5"> I&apos;ve played Piano since I was about 10. I used to play a lot of sheet music, but I was never good at sight reading.
+            In the last year or so I&apos;ve been getting into freestyling. Here&apos;s a video of me doing a little e minor diddy.
+            I especially like blues freestyles. I have roots in New Orleans, so it's fun to have that connection mixed with something I like. </p>
+        </div>
+      </div>
 
       <div className="m-5 flex items-center">
         <div className="inline-block w-1/2 m-5">
@@ -38,7 +47,7 @@ export default function AboutPage() {
         </div>
         <div className="inline-block w-1/2 m-5">
           <p className=""> I&apos;ve had 2 mustangs in my life My dad got my first when I was in highschool and it got me through college. It was a maroon 2006 coupe.
-            I've been using my 2017 gt convertible for about 4 years now and I'm going to run it into the ground and never sell it.
+            I&apos;ve been using my 2017 gt convertible for about 4 years now and I&apos;m going to run it into the ground and never sell it.
             There&apos;s no other muscle car for me than a mustang!
           </p>
         </div>
