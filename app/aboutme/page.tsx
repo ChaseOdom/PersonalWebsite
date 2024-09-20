@@ -21,12 +21,13 @@ export default function AboutPage() {
 
       <div className="m-5 flex items-center">
         <video className="flex w-1/3" controls>
+          <track default kind="captions" src="" />
           <source src="/piano2.MP4"></source>
         </video>
         <div className="inline-block w-1/2 space-x-5">
           <p className=" m-5"> I&apos;ve played Piano since I was about 10. I used to play a lot of sheet music, but I was never good at sight reading.
-            In the last year or so I&apos;ve been getting into freestyling. Here&apos;s a video of me doing a little e minor diddy.
-            I especially like blues freestyles. I have roots in New Orleans, so it's fun to have that connection mixed with something I like. </p>
+            In the last year or so I&apos;ve been getting into freestyling. Here&apos;s a video of me doing a little e minor jig.
+            I especially like blues freestyles. I have roots in New Orleans, so it&apos;s fun to have that connection mixed with something I like. </p>
         </div>
       </div>
 
