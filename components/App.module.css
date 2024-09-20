@@ -6,14 +6,14 @@
 
 .backgroundPressed{
     background-color: rgb(82, 82, 82);
-    width: calc(120px + 15vw);
-    height: calc(8vw + 50px);
+    width: calc(120px + 5vw);
+    height: calc(5vw + 50px);
 }
 
 .backgroundUnpressed{
     background-color: rgb(32, 32, 32);
-    width: calc(120px + 15vw);
-    height: calc(8vw + 50px);
+    width: calc(120px + 5vw);
+    height: calc(5vw + 50px);
 }
 
 .mainContentStyle{
@@ -21,13 +21,16 @@
 }
 
 .mainCard{
-    height: calc(20vw + 80px)
+    height: calc(18vw + 275px);
+    width: calc(50vw + 180px);
 }
 
 .cardTitle{
     flex-direction: column;
     height: calc(1vw);
     align-items: center;
+    margin-bottom: 10px;
+    margin-top: -12px;
 }
 
 .urlStyle{

@@ -14,9 +14,9 @@ export function MainCard(props: MainCardProps) {
 
     return(
         <Card className={styles.mainCard}>
-            <CardBody className="grid grid-cols-3 grid-rows-1">
-                <Image className="col-span-2" src={props.cardImgs[0]} alt="Stevon"/>
-                <div className="flex flex-col items-center w-full border-2 border-[#424242] overflow-x-auto">
+            <CardBody className="grid grid-cols-1 grid-rows-5">
+                <Image className="row-span-3 h-full" src={props.cardImgs[0]} alt="Stevon"/>
+                <div className="flex flex-col row-span-2 items-center w-full border-2 border-[#424242] overflow-x-auto">
                     <div className="flex border-b-1 border-[#424242] w-full justify-center">
                         <p className="text-2xl">{props.title}</p>
                     </div>

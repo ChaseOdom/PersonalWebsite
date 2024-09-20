@@ -16,7 +16,6 @@ import styles from '@/components/App.module.css';
 import { MainCard } from "@/components/MainCard";
 import { useState, useEffect } from 'react';
 
-
 interface mainCardStruct {
     title: string;
     description: string;
@@ -25,7 +24,28 @@ interface mainCardStruct {
 
 export default function App() {
     
+    function getWindowDimensions() {
+        const { innerWidth: width, innerHeight: height } = window;
+        return {
+          width,
+          height
+        };
+      }
+    
+    function useWindowDimensions() {
+        const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+        useEffect(() => {
+        function handleResize() {
+            setWindowDimensions(getWindowDimensions());
+        }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+            }, []);
+        return windowDimensions;
+      }
+
     const [selectedCard, setSelectedCard] = React.useState(0);
+    const {width, height} = useWindowDimensions();
 
     function cardSelected(index: number){
         setSelectedCard(index);
@@ -72,7 +92,8 @@ export default function App() {
 
     return (
         <div>
-            <div className="block justify-center pb-5">
+            <div>width= {width}</div>
+            <div className="flex justify-center items-center pb-5">
                 {MainCards[0]}
             </div>
             <div className="flex flex-row justify-center items-center gap-4">
