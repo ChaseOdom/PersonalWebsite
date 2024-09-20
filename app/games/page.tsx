@@ -14,6 +14,31 @@ import cowTitle from "@/components/pictures/ctitle.png";
 import cabinTitle from "@/components/pictures/dtitle.png";
 import styles from '@/components/App.module.css';
 import { MainCard } from "@/components/MainCard";
+import { useState, useEffect } from 'react';
+
+function getWindowDimensions() {
+  const { innerWidth: width, innerHeight: height } = window;
+  return {
+    width,
+    height
+  };
+}
+
+function useWindowDimensions() {
+  const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowDimensions(getWindowDimensions());
+    }
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  return windowDimensions;
+}
+
 
 interface mainCardStruct {
     title: string;
@@ -24,6 +49,7 @@ interface mainCardStruct {
 export default function App() {
     
     const [selectedCard, setSelectedCard] = React.useState(0);
+    const {width, height} = useWindowDimensions();
 
     function cardSelected(index: number){
         setSelectedCard(index);
@@ -68,20 +94,38 @@ export default function App() {
         <GameCard title="Attention Span" description="Warioware meets tiktok brainrot!" key="" cardImg={spanTitle} index={3} selected={selectedCard == 3} cardClicked={cardSelected}></GameCard>,
     ];
 
+    if (width > 1500){
     return (
         <div>
+            <div>width = {width}</div>
             <div className="block justify-center pb-5">
                 {MainCards[0]}
             </div>
-            <div className="flex flex-row justify-center gap-4">
-                <Button color="default" size="lg" radius="lg" isIconOnly={true} onPress={leftCardButtonPressed}>{'<'}</Button>
+            <div className="flex flex-row justify-center items-center gap-4">
+                <Button color="default" size="lg" radius="lg" className="text-3xl" isIconOnly={true} onPress={leftCardButtonPressed}>{'<'}</Button>
                 {GameCards[0]}
                 {GameCards[1]}
                 {GameCards[2]}
                 {GameCards[3]}
-                <Button color="default" size="lg" radius="lg" isIconOnly={true} onPress={rightCardButtonPressed}>{'>'}</Button>
+                <Button color="default" size="lg" radius="lg" className="text-3xl" isIconOnly={true} onPress={rightCardButtonPressed}>{'>'}</Button>
             </div>
         </div>
     );
-    return (<div>Hello</div>);
+    } else {
+        return (
+            <div>
+            <div>width = {width}</div>
+            <div className="block justify-center pb-5">
+                {MainCards[0]}
+            </div>
+            <div className="flex flex-row justify-center items-center gap-4">
+                <Button color="default" size="lg" radius="lg" className="text-3xl" isIconOnly={true} onPress={leftCardButtonPressed}>{'<'}</Button>
+                {GameCards[0]}
+                {GameCards[1]}
+                {GameCards[2]}
+                <Button color="default" size="lg" radius="lg" className="text-3xl" isIconOnly={true} onPress={rightCardButtonPressed}>{'>'}</Button>
+            </div>
+        </div>
+        );
+    }
 }

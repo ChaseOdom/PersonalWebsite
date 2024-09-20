@@ -20,13 +20,15 @@ export function GameCard(props: cardProps) {
 
     return(
         <Card className={props.selected ? styles.backgroundPressed : styles.backgroundUnpressed} isHoverable={true} isPressable={true} onPress={HandlePressed}>
-            <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
+            <CardHeader className={styles.cardTitle}>
                 <p className={styles.test}>{props.title}</p>
-                <small className="text-default-500">{props.description}</small>
+                
             </CardHeader>
-            <CardBody className="overflow-visible py-2 place-items-baseline">
-                <Image className="object-cover" src={props.cardImg} width={150} height={150}alt="Stevon"/>
+            <CardBody className="flex items-center">
+                <Image className="object-cover" src={props.cardImg} alt="Stevon"/>
             </CardBody>
         </Card>
 );
 }
+
+//<small className="text-default-500">{props.description}</small>

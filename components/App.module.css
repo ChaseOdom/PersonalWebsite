@@ -1,19 +1,38 @@
 .test{
-    color:DodgerBlue
+    color:rgb(255, 255, 255);
+    font-size: calc(.5vw + 10px);
+    margin: 3px
 }
 
 .backgroundPressed{
     background-color: rgb(82, 82, 82);
-    width: 15%;
-    height: 20;
+    width: calc(120px + 15vw);
+    height: calc(8vw + 50px);
 }
 
 .backgroundUnpressed{
     background-color: rgb(32, 32, 32);
-    width: 15%;
-    height: 20;
+    width: calc(120px + 15vw);
+    height: calc(8vw + 50px);
 }
 
 .mainContentStyle{
     background-color: rgb(32, 32, 32);
+}
+
+.mainCard{
+    height: calc(20vw + 80px)
+}
+
+.cardTitle{
+    flex-direction: column;
+    height: calc(1vw);
+    align-items: center;
+}
+
+.urlStyle{
+    border-bottom: 0;
+    color: rgb(0, 81, 255);
+    text-decoration: underline;
+    font-size: calc(1vw + 10px)
 }
