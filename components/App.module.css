@@ -5,12 +5,16 @@
 }
 
 .backgroundPressed{
+    display: flex;
+    align-items: center;
     background-color: #525252;
     width: calc(120px + 5vw);
     height: calc(6vw + 30px);
 }
 
 .backgroundUnpressed{
+    display: flex;
+    align-items: center;
     background-color: rgb(32, 32, 32);
     width: calc(120px + 5vw);
     height: calc(6vw + 37px);
@@ -26,7 +30,6 @@
 }
 
 .cardTitle{
-    align-items: center;
     justify-content: center;
     height: calc(1vw);
     margin-bottom: calc(.3vw - 15px);
@@ -44,4 +47,5 @@
     overflow: hidden;
     padding-bottom: 20px;
     height: 1vw;
+    width: calc(8vw + 35px);
 }
