@@ -1,14 +1,15 @@
 .paragraphFont{
     font-size: calc(.6vw + 12px);
-    margin-left: 2%;
 }
 
 .paragraphContainerLeft{
-    width: calc(50vw + 50px);
+    width: calc(50vw + 70px);
     margin-right: 2vw;
+    margin-left: 0;
 }
 
 .paragraphContainerRight{
-    width: calc(50vw + 50px);
+    width: calc(50vw + 70px);
     margin-left: 2vw;
+    margin-right: 0;
 }

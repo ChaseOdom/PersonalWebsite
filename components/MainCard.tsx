@@ -3,29 +3,28 @@ import {Card, CardHeader, CardBody} from "@nextui-org/react";
 import Image, { StaticImageData } from 'next/image';
 import styles from './App.module.css';
 
-interface cardProps {
+interface MainCardProps {
     title: string;
     description: string;
-    selected: boolean;
-    cardImg: StaticImageData;
-    cardClicked: (message: number) => void;
-    index: number;
+    cardImgs: StaticImageData[];
+    gameURL: string;
 }
 
-export function MainCard(props: cardProps) {
-
-    function HandlePressed(){
-        props.cardClicked(props.index);
-    }
+export function MainCard(props: MainCardProps) {
 
     return(
-        <Card className={props.selected ? styles.backgroundPressed : styles.backgroundUnpressed} isHoverable={true} isPressable={true} onPress={HandlePressed}>
-            <CardHeader className="pb-0 pt-2 px-4 flex-col items-center">
-                <p className={styles.test}>{props.title}</p>
-                <small className="text-default-500">{props.description}</small>
-            </CardHeader>
-            <CardBody className="overflow-visible py-2 place-items-baseline">
-                <Image className="object-cover" src={props.cardImg} width={150} height={150}alt="Stevon"/>
+        <Card className="">
+            <CardBody className="grid grid-cols-3 grid-rows-1">
+                <Image className="col-span-2" src={props.cardImgs[0]} alt="Stevon"/>
+                <div className="flex flex-col items-center w-full border-2 border-[#424242]">
+                    <div className="flex border-b-1 border-[#424242] w-full justify-center">
+                        <p className="text-2xl">{props.title}</p>
+                    </div>
+                    <p className="m-3">
+                        {props.description}
+                    </p>
+                    <a href={props.gameURL} className="text-xl underline text-blue-500" target="_blank">Play the game here</a>
+                </div>
             </CardBody>
         </Card>
 );
