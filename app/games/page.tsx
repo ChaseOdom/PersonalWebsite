@@ -66,7 +66,7 @@ export default function App() {
         <GameCard title="Pulse" description="Award winning survival-horror game" key="" cardImg={pulseTitle} index={0} selected={selectedCard == 0} cardClicked={cardSelected}></GameCard>,
         <GameCard title="Cows" description="Cows vs. Aliens wave shooter" key="" cardImg={cowTitle} index={1} selected={selectedCard == 1} cardClicked={cardSelected}></GameCard>,
         <GameCard title="Cabin" description="Also Award winning puzzle game with horror" key="" cardImg={cabinTitle} index={2} selected={selectedCard == 2} cardClicked={cardSelected}></GameCard>,
-        <GameCard title="Attention Span" description="Warioware meets tiktok brainrot!" key="" cardImg={spanTitle} index={3} selected={selectedCard == 3} cardClicked={cardSelected}></GameCard>,
+        <GameCard title="Brainrot" description="Warioware meets tiktok brainrot!" key="" cardImg={spanTitle} index={3} selected={selectedCard == 3} cardClicked={cardSelected}></GameCard>,
     ];
 
     return (
@@ -79,6 +79,7 @@ export default function App() {
                 {GameCards[0]}
                 {GameCards[1]}
                 {GameCards[2]}
+                {GameCards[3]}
                 <Button color="default" size="lg" radius="lg" className="text-3xl" isIconOnly={true} onPress={rightCardButtonPressed}>{'>'}</Button>
             </div>
         </div>
