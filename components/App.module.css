@@ -29,6 +29,12 @@
     width: calc(50vw + 180px);
 }
 
+.mainCardPicture{
+    grid-row: span 3 / span 3;
+    height: 100%;
+    width: calc(50% + 100px);
+}
+
 .cardTitle{
     justify-content: center;
     height: calc(1vw);
