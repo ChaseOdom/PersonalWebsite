@@ -32,7 +32,7 @@
 .mainCardPicture{
     grid-row: span 3 / span 3;
     height: 100%;
-    width: calc(50% + 100px);
+    width: calc(45% + 150px);
 }
 
 .cardTitle{
