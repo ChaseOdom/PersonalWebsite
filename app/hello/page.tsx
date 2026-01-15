@@ -8,49 +8,68 @@ const CameraToPdf: React.FC = () => {
     const webcamRef = useRef<Webcam>(null);
     const [capturedImg, setCapturedImg] = useState<string | null>(null);
 
-    // Video constraints (use 'environment' for back camera on mobile)
     const videoConstraints = {
         width: 1280,
         height: 720,
-        facingMode: "user"
+        // Using 'environment' is standard for document capture
+        facingMode: { ideal: "environment" }
+    };
+
+    // Trigger focus on mobile devices
+    const handleFocus = async () => {
+        const video = webcamRef.current?.video;
+        if (!video || !video.srcObject) return;
+
+        const stream = video.srcObject as MediaStream;
+        const track = stream.getVideoTracks()[0];
+        const capabilities = track.getCapabilities() as any;
+
+        // Check if the browser and hardware support focusMode control
+        if (capabilities.focusMode) {
+            try {
+                // To trigger a "re-focus" event, we toggle the mode
+                await track.applyConstraints({
+                    advanced: [{ focusMode: "manual", focusDistance: 0 }]
+                } as any);
+
+                // Immediately return to continuous for the best user experience
+                await track.applyConstraints({
+                    advanced: [{ focusMode: "continuous" }]
+                } as any);
+            } catch (err) {
+                console.error("Focus adjustment not supported or failed:", err);
+            }
+        }
     };
 
     const capture = useCallback(() => {
         const imageSrc = webcamRef.current?.getScreenshot();
-        if (imageSrc) {
-            setCapturedImg(imageSrc);
-        }
+        if (imageSrc) setCapturedImg(imageSrc);
     }, [webcamRef]);
 
     const generatePDF = () => {
         if (!capturedImg) return;
-
-        const doc = new jsPDF({
-            orientation: 'landscape',
-            unit: 'px',
-            format: [1280, 720]
-        });
-
+        const doc = new jsPDF({ orientation: 'landscape', unit: 'px', format: [1280, 720] });
         doc.addImage(capturedImg, 'JPEG', 0, 0, 1280, 720);
         doc.save("camera-capture.pdf");
     };
 
     return (
         <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h2>Camera to PDF Converter</h2>
-
+            <h2>Camera to PDF</h2>
             {!capturedImg ? (
-                <>
+                <div style={{ position: 'relative', display: 'inline-block' }}>
                     <Webcam
                         audio={false}
                         ref={webcamRef}
                         screenshotFormat="image/jpeg"
                         videoConstraints={videoConstraints}
-                        style={{ width: '100%', maxWidth: '600px', borderRadius: '10px' }}
+                        onClick={handleFocus} // Click video area to focus
+                        style={{ width: '100%', maxWidth: '600px', borderRadius: '10px', cursor: 'crosshair' }}
                     />
-                    <br />
+                    <p style={{ fontSize: '12px', color: '#666' }}>Tap video to focus</p>
                     <button onClick={capture} style={buttonStyle}>Capture Photo</button>
-                </>
+                </div>
             ) : (
                 <>
                     <img src={capturedImg} alt="Captured" style={{ width: '100%', maxWidth: '600px' }} />
@@ -65,11 +84,6 @@ const CameraToPdf: React.FC = () => {
     );
 };
 
-const buttonStyle = {
-    margin: '10px',
-    padding: '10px 20px',
-    fontSize: '16px',
-    cursor: 'pointer'
-};
+const buttonStyle = { margin: '10px', padding: '10px 20px', fontSize: '16px', cursor: 'pointer' };
 
 export default CameraToPdf;
