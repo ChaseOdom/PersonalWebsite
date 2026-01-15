@@ -1,7 +1,12 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
-import { Html5Qrcode, Html5QrcodeCameraScanConfig, Html5QrcodeFullConfig } from "html5-qrcode";
+import {useEffect, useRef, useState} from "react";
+import {
+  Html5Qrcode,
+  Html5QrcodeCameraScanConfig,
+  Html5QrcodeFullConfig,
+  Html5QrcodeSupportedFormats
+} from "html5-qrcode";
 
 export default function Page() {
   const scannerRef = useRef<Html5Qrcode | null>(null);
@@ -13,7 +18,8 @@ export default function Page() {
 
   const camConfigs : Html5QrcodeFullConfig = {
     verbose: true,
-    useBarCodeDetectorIfSupported: true
+    useBarCodeDetectorIfSupported: true,
+    formatsToSupport: [Html5QrcodeSupportedFormats.CODE_39, Html5QrcodeSupportedFormats.PDF_417]
   }
 
   useEffect(() => {
@@ -28,8 +34,8 @@ export default function Page() {
     setScannedText(null);
 
     const config: Html5QrcodeCameraScanConfig = {
-      fps: 5,
-
+      fps: 2,
+      aspectRatio: 3
     };
 
     const html5QrCode = new Html5Qrcode(SCANNER_ID, camConfigs);
