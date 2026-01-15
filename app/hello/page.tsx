@@ -3,48 +3,35 @@
 import React, { useRef, useState, useCallback } from 'react';
 import Webcam from 'react-webcam';
 import { jsPDF } from 'jspdf';
+import Tesseract from 'tesseract.js'; // npm install tesseract.js
 
 const CameraToPdf: React.FC = () => {
     const webcamRef = useRef<Webcam>(null);
     const [capturedImg, setCapturedImg] = useState<string | null>(null);
+    const [detectedNumber, setDetectedNumber] = useState<string | null>(null);
+    const [isScanning, setIsScanning] = useState(false);
 
-    const videoConstraints = {
-        width: 1280,
-        height: 720,
-        // Using 'environment' is standard for document capture
-        facingMode: { ideal: "environment" }
-    };
+    const videoConstraints = { width: 1280, height: 720, facingMode: { ideal: "environment" } };
 
-    // Trigger focus on mobile devices
-    const handleFocus = async () => {
-        const video = webcamRef.current?.video;
-        if (!video || !video.srcObject) return;
+    const capture = useCallback(async () => {
+        const imageSrc = webcamRef.current?.getScreenshot();
+        if (imageSrc) {
+            setCapturedImg(imageSrc);
+            setDetectedNumber(null);
+            setIsScanning(true);
 
-        const stream = video.srcObject as MediaStream;
-        const track = stream.getVideoTracks()[0];
-        const capabilities = track.getCapabilities() as any;
-
-        // Check if the browser and hardware support focusMode control
-        if (capabilities.focusMode) {
+            // OCR processing to find a 10-digit number
             try {
-                // To trigger a "re-focus" event, we toggle the mode
-                await track.applyConstraints({
-                    advanced: [{ focusMode: "manual", focusDistance: 0 }]
-                } as any);
-
-                // Immediately return to continuous for the best user experience
-                await track.applyConstraints({
-                    advanced: [{ focusMode: "continuous" }]
-                } as any);
-            } catch (err) {
-                console.error("Focus adjustment not supported or failed:", err);
+                const { data: { text } } = await Tesseract.recognize(imageSrc, 'eng');
+                const match = text.match(/\b\d{10}\b/); // Matches exactly 10 digits
+                setDetectedNumber(match ? match[0] : "No number found");
+            } catch (error) {
+                console.error("OCR Error:", error);
+                setDetectedNumber("Error scanning image");
+            } finally {
+                setIsScanning(false);
             }
         }
-    };
-
-    const capture = useCallback(() => {
-        const imageSrc = webcamRef.current?.getScreenshot();
-        if (imageSrc) setCapturedImg(imageSrc);
     }, [webcamRef]);
 
     const generatePDF = () => {
@@ -55,35 +42,32 @@ const CameraToPdf: React.FC = () => {
     };
 
     return (
-        <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h2>Camera to PDF</h2>
+        <div style={{ textAlign: 'center', padding: '20px', fontFamily: 'sans-serif' }}>
+            <h2>Camera to PDF Converter</h2>
+
             {!capturedImg ? (
-                <div style={{ position: 'relative', display: 'inline-block' }}>
-                    <Webcam
-                        audio={false}
-                        ref={webcamRef}
-                        screenshotFormat="image/jpeg"
-                        videoConstraints={videoConstraints}
-                        onClick={handleFocus} // Click video area to focus
-                        style={{ width: '100%', maxWidth: '600px', borderRadius: '10px', cursor: 'crosshair' }}
-                    />
-                    <p style={{ fontSize: '12px', color: '#666' }}>Tap video to focus</p>
-                    <button onClick={capture} style={buttonStyle}>Capture Photo</button>
-                </div>
+                <>
+                    <Webcam ref={webcamRef} audio={false} screenshotFormat="image/jpeg" videoConstraints={videoConstraints} style={cameraStyle} />
+                    <br />
+                    <button onClick={capture} style={buttonStyle}>Capture & Scan</button>
+                </>
             ) : (
                 <>
-                    <img src={capturedImg} alt="Captured" style={{ width: '100%', maxWidth: '600px' }} />
-                    <br />
+                    <img src={capturedImg} alt="Captured" style={cameraStyle} />
+                    <div style={resultBoxStyle}>
+                        <strong>Detected 10-Digit Number:</strong>
+                        <p>{isScanning ? "Scanning text..." : detectedNumber}</p>
+                    </div>
                     <button onClick={() => setCapturedImg(null)} style={buttonStyle}>Retake</button>
-                    <button onClick={generatePDF} style={{ ...buttonStyle, backgroundColor: '#28a745' }}>
-                        Download PDF
-                    </button>
+                    <button onClick={generatePDF} style={{ ...buttonStyle, backgroundColor: '#28a745' }}>Download PDF</button>
                 </>
             )}
         </div>
     );
 };
 
-const buttonStyle = { margin: '10px', padding: '10px 20px', fontSize: '16px', cursor: 'pointer' };
+const cameraStyle = { width: '100%', maxWidth: '600px', borderRadius: '10px', border: '2px solid #ddd' };
+const buttonStyle = { margin: '10px', padding: '10px 20px', fontSize: '16px', cursor: 'pointer', borderRadius: '5px', border: 'none', backgroundColor: '#007bff', color: 'white' };
+const resultBoxStyle = { margin: '15px auto', padding: '10px', maxWidth: '400px', border: '1px solid #ccc', borderRadius: '5px', backgroundColor: '#f9f9f9' };
 
 export default CameraToPdf;
