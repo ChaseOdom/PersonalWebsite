@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Html5Qrcode, Html5QrcodeCameraScanConfig } from "html5-qrcode";
+import { Html5Qrcode, Html5QrcodeCameraScanConfig, Html5QrcodeFullConfig } from "html5-qrcode";
 
 export default function Page() {
   const scannerRef = useRef<Html5Qrcode | null>(null);
@@ -10,6 +10,11 @@ export default function Page() {
   const [error, setError] = useState<string | null>(null);
 
   const SCANNER_ID = "html5-qrcode";
+
+  const camConfigs : Html5QrcodeFullConfig = {
+    verbose: true,
+    useBarCodeDetectorIfSupported: true
+  }
 
   useEffect(() => {
     return () => {
@@ -23,10 +28,11 @@ export default function Page() {
     setScannedText(null);
 
     const config: Html5QrcodeCameraScanConfig = {
-      fps: 10,
+      fps: 5,
+
     };
 
-    const html5QrCode = new Html5Qrcode(SCANNER_ID);
+    const html5QrCode = new Html5Qrcode(SCANNER_ID, camConfigs);
 
     scannerRef.current = html5QrCode;
 
