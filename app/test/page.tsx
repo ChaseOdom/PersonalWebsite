@@ -1,64 +1,87 @@
 "use client";
 
-import React, { useState } from "react";
-import dynamic from "next/dynamic";
+import { useEffect, useRef, useState } from "react";
+import { Html5Qrcode, Html5QrcodeCameraScanConfig } from "html5-qrcode";
 
-// Polyfill MUST be imported on the client
-import "react-barcode-scanner/polyfill";
+export default function Page() {
+  const scannerRef = useRef<Html5Qrcode | null>(null);
+  const [scannedText, setScannedText] = useState<string | null>(null);
+  const [isScanning, setIsScanning] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-/**
- * react-barcode-scanner exports a NAMED export, not default
- * This is the critical fix
- */
-const BarcodeScanner = dynamic(
-    async () => {
-        const mod = await import("react-barcode-scanner");
-        return mod.BarcodeScanner as unknown as React.FC<any>;
-    },
-    {
-        ssr: false,
-        loading: () => <p>Loading camera…</p>,
+  const SCANNER_ID = "html5-qrcode";
+
+  useEffect(() => {
+    return () => {
+      stopScanner();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const startScanner = async () => {
+    setError(null);
+    setScannedText(null);
+
+    const config: Html5QrcodeCameraScanConfig = {
+      fps: 10,
+    };
+
+    const html5QrCode = new Html5Qrcode(SCANNER_ID);
+
+    scannerRef.current = html5QrCode;
+
+    try {
+      await html5QrCode.start(
+        { facingMode: "environment" },
+        config,
+        (decodedText) => {
+          setScannedText(decodedText);
+          stopScanner(); // stop after successful scan
+        },
+        () => {
+          // ignore scan errors
+        },
+      );
+      setIsScanning(true);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to access camera.");
     }
-);
+  };
 
-export default function BarcodeScannerPage() {
-    const [value, setValue] = useState<string | null>(null);
-    const [error, setError] = useState<string | null>(null);
+  const stopScanner = async () => {
+    if (scannerRef.current) {
+      try {
+        await scannerRef.current.stop();
+        await scannerRef.current.clear();
+      } catch {
+        // ignore cleanup errors
+      }
+      scannerRef.current = null;
+    }
+    setIsScanning(false);
+  };
 
-    return (
-        <main
-            style={{
-                padding: "1rem",
-                maxWidth: 480,
-                margin: "0 auto",
-                textAlign: "center",
-            }}
-        >
-            <h1>Code 39 Barcode Scanner</h1>
+  return (
+    <main style={{ padding: 24 }}>
+      <h1>Barcode Scanner</h1>
 
-            <BarcodeScanner
-                options={{ formats: ['pdf417', 'code_39'] }}
-                onCapture={(result: any) => {
-                    const cleaned = result?.rawValue?.replace(/\*/g, "");
-                    setValue(cleaned);
-                    setError(null);
-                }}
-                onError={(err: any) => {
-                    console.error(err);
-                    setError("Camera access failed");
-                }}
-            />
+      {!isScanning ? (
+        <button onClick={startScanner}>Start Scanner</button>
+      ) : (
+        <button onClick={stopScanner}>Stop Scanner</button>
+      )}
 
-            {value && (
-                <div style={{ marginTop: "1rem" }}>
-                    <strong>Scanned Value:</strong>
-                    <p style={{ fontSize: "1.2rem" }}>{value}</p>
-                </div>
-            )}
+      <div id={SCANNER_ID} style={{ width: 350, marginTop: 16 }} />
 
-            {error && (
-                <p style={{ marginTop: "1rem", color: "red" }}>{error}</p>
-            )}
-        </main>
-    );
+      {scannedText && (
+        <div style={{ marginTop: 16 }}>
+          <strong>Scanned Value:</strong>
+          <p>{scannedText}</p>
+        </div>
+      )}
+
+      {error && <p style={{ color: "red", marginTop: 16 }}>{error}</p>}
+    </main>
+  );
 }
