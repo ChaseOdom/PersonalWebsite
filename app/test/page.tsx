@@ -37,7 +37,7 @@ export default function BarcodeScannerPage() {
             <h1>Code 39 Barcode Scanner</h1>
 
             <BarcodeScanner
-                options={{ formats: ["code_39"] }}
+                options={{ formats: ['pdf417', 'code_39'] }}
                 onCapture={(result: any) => {
                     const cleaned = result?.rawValue?.replace(/\*/g, "");
                     setValue(cleaned);
